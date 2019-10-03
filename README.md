@@ -48,4 +48,31 @@ Further, I ordered the following USB cables from Amazon:
 * https://www.amazon.de/gp/product/B00P0ES0VC/
 
 The UGreen USB3 extension cable is of decent quality and can be crimped perfectly into the Micromatch connector.
-(Yes, it needs to be cut into halves, sorry. The female connector is for the lamp, the male can be used for ISP programming)
+(Yes, it needs to be cut into halves, sorry. The female connector is needed for the front light, the male can be used to build an adapter for the ISP programmer)
+
+# Building and Flashing the Firmware
+You need to have an AVR toolchain installed (make, gcc, binutils)
+
+On Arch Linux simply install the following packages:
+
+`# pacman -S community/avr-gcc community/avr-binutils`
+
+I'm still using my good old AVR Dragon (unfortunately, it seems to be out of production), which needs to have avrdude installed:
+
+`# pacman -S avrdude`
+
+If you own a different programmer there is a good chance it's also supported by avrdude, otherwise just install whatever software it needs and don't forget to adopt the program/fuses section of the Makefile accordingly.
+
+To build the firmware change into the `src` directory and run:
+
+`# make`
+
+...then connect the board to your ISP programmer (it needs to be powered through the programmer!) and flash the fuses:
+
+`# make fuses`
+
+...and firmware:
+
+`# make program`
+
+Done.
