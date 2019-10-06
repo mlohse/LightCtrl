@@ -5,7 +5,9 @@ The goal of this project is to power the scooter's front light from the main LiP
 Further, it allows the light to be switched on/off conveniently via the throttle controller's power button (same as the rear light)
 or have the light switched on/off automatically when it gets dark.
 
-The PCB needs to be installed into the front light battery compartment. The on/off switch is no longer needed and can be replaced by a photo transistor.
+The PCB needs to be installed into the front light's battery compartment. The on/off switch is no longer needed and can be replaced by a photo transistor.
+
+A short demo video (German) is available on vimeo: https://vimeo.com/364582430
 
 
 # Required Skills
@@ -23,7 +25,7 @@ Before you consider building your own, please be aware that you'll need some ski
 
 * You'll need to use an ISP-programmer for flashing the firmware
 
-No, this project is not suitable for beginners and of course I won't take any liability if you break your scooter.
+No, this project is certainly not suitable for beginners and of course I won't take any liability if you break your scooter.
 
 
 # Bill of Material (BOM)
@@ -31,7 +33,7 @@ The PCB can be ordered at OSH Park (they ship worldwide):
 
 * https://oshpark.com/shared_projects/PSo9nJN7
 
-I had all components laying around from other projects already, so I didn't had to order any.
+It doesn't really matter of which brand/type you order resistors and capacitors, nor does this board require any tight tolerances. You can purchase whatever your local hardware dealer has on stock fitting the value/package described by the schematic.
 However, for convenience I've created a virtual shopping basket at Reichelt Elektronik:
 
 * https://www.reichelt.de/my/1627216
@@ -41,14 +43,14 @@ Order-No.: 29G8736
 
 * https://www.buerklin.com/de/Produkte/Elektromechanik/Relais-und-Sch%C3%BCtze/PhotoMOS-Relais/AQY-212-EHA%2C-SMD-Relais/p/29G8736
 
-Further, I ordered the following USB cables from Amazon:
+Further, I've tried several (low-cost) usb cables from Amazon which didn't quite fit my needs, until I came across these 2:
 
-* https://www.amazon.de/gp/product/B01I1HXRK8/
+* https://www.amazon.de/gp/product/B01I1HXRK8/ (this is actually much shorter than 40cm, I measured only 34cm!)
 
 * https://www.amazon.de/gp/product/B00P0ES0VC/
 
 The UGreen USB3 extension cable is of decent quality and can be crimped perfectly into the Micromatch connector.
-(Yes, it needs to be cut into halves, sorry. The female connector is needed for the front light, the male can be used to build an adapter for the ISP programmer)
+(Yes, it needs to be cut into halves: The female connector is needed for the front light, the male can be used to build an adapter for the ISP programmer)
 
 # Building and Flashing the Firmware
 You need to have an AVR toolchain installed (make, gcc, binutils)
