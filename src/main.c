@@ -13,7 +13,7 @@
 #include "timer.h"
 
 
-void init(void)
+static void init(void)
 {
 	/* configure & initialize io ports */
 	DDRA = IO_DDRA;
