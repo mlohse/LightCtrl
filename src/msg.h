@@ -8,40 +8,26 @@
 #define MSG_H_
 
 #include <stdint.h>
-#include "config.h"
 #include "timer.h"
 
-#define THROTTLE_MSG_START 0xFD
-#define THROTTLE_MSG_SIZE  7
 
-#define THROTTLE_V4     0
-#define THROTTLE_V3X    1
-
-/**
- * @brief throttle_mode_t Byte 5 of throttle control seems to be related to max.
- *                        torque but can also be used to determine which mode/gear
- *                        is currently configured by the user. These values
- *                        differ slightly on V4 vs. V3X throttle control.
- */
 typedef enum
 {
-#if THROTTLE_VERSION == THROTTLE_V4
 	THROTTLE_MODE0 = 0x00,
-	THROTTLE_MODE1 = 0x05,
-	THROTTLE_MODE2 = 0x07,
-	THROTTLE_MODE3 = 0x09,
-	THROTTLE_MODE4 = 0x0B,
-	THROTTLE_MODE5 = 0x0D
-#endif
-#if THROTTLE_VERSION == THROTTLE_V3X
-	THROTTLE_MODE0 = 0x00,
-	THROTTLE_MODE1 = 0x05,
-	THROTTLE_MODE2 = 0x06,
-	THROTTLE_MODE3 = 0x07,
-	THROTTLE_MODE4 = 0x09,
-	THROTTLE_MODE5 = 0x0D
-#endif
+	THROTTLE_MODE1 = 0x10,
+	THROTTLE_MODE2 = 0x20,
+	THROTTLE_MODE3 = 0x30,
+	THROTTLE_MODE4 = 0x40,
+	THROTTLE_MODE5 = 0x50,
+	THROTTLE_MODE_UNKNOWN = 0xf0
 } throttle_mode_t;
+
+typedef enum
+{
+	THROTTLE_WHEEL_UNKNOWN = 0x06, // old V4 (<FW_VER 9.3) or V3X
+	THROTTLE_WHEEL_SIZE08 =  0x07,
+	THROTTLE_WHEEL_SIZE10 =  0x09
+} throttle_wsize_t;
 
 /**
  * @brief throttle_flags_t Byte 3 of throttle control holds flags for controlling
@@ -52,9 +38,10 @@ typedef enum
  */
 typedef enum
 {
-	START_WNOPUSH_FLAG  = 0x20,
-	CRUISE_CONTROL_FLAG = 0x40,
-	LIGHT_ENABLED_FLAG  = 0x80
+	FLAG_NONE           = 0x00,
+	FLAG_START_WNOPUSH  = 0x20,
+	FLAG_CRUISE_CONTROL = 0x40,
+	FLAG_LIGHT_ENABLED  = 0x80
 } throttle_flags_t;
 
 #define THROTTLE_FLAG_MASK 0xE0
@@ -71,7 +58,9 @@ typedef enum
 typedef struct
 {
 	uint8_t speed;
-	uint8_t mode;
+	uint8_t torque;
+	throttle_mode_t mode;
+	throttle_wsize_t wsize;
 	throttle_flags_t flags;
 } throttle_msg_t;
 

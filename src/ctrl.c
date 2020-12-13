@@ -42,7 +42,7 @@ void ctrl_run(void)
 	msg = msg_parse();
 	if (msg)
 	{
-		uint8_t light = (msg->flags & LIGHT_ENABLED_FLAG) ? 1 : 0;
+		uint8_t light = (msg->flags & FLAG_LIGHT_ENABLED) ? 1 : 0;
 		switch(msg->mode)
 		{
 			case THROTTLE_MODE0:
@@ -62,7 +62,7 @@ void ctrl_run(void)
 		{
 			light = ctrl_autolight(); /* overwrite light setting of throttle */
 		}
-		msg->flags = light ? (msg->flags | LIGHT_ENABLED_FLAG) : (msg->flags & ~LIGHT_ENABLED_FLAG);
+		msg->flags = light ? (msg->flags | FLAG_LIGHT_ENABLED) : (msg->flags & ~FLAG_LIGHT_ENABLED);
 		msg_send(msg); /* forward (modified) message to control unit */
 
 		led_set(LED_OUT, light);
