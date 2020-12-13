@@ -1,9 +1,12 @@
 # LightCtrl
+
+![cover image](https://github.com/mlohse/LightCtrl/blob/master/img/cover.jpg?raw=true)
+
 Light Controller for Egret TenV4 electric scooter
 
-The goal of this project is to power the scooter's front light from the main LiPo battery instead of using throw-away AAA batteries.
+The goal of this project is to power the scooter's front light from the main LiPo battery instead of using 4x throw-away alkaline batteries (AAA).
 Further, it allows the light to be switched on/off conveniently via the throttle controller's power button (same as the rear light)
-or have the light switched on/off automatically when it gets dark.
+or have the light switched on/off automatically when it's getting dark (e.g. in tunnels or at night).
 
 The PCB needs to be installed into the front light's battery compartment. The on/off switch is no longer needed and can be replaced by a photo transistor.
 
@@ -13,19 +16,20 @@ A short demo video (German) is available on vimeo: https://vimeo.com/364582430
 # Required Skills
 Before you consider building your own, please be aware that you'll need some skills here:
 
-* You should be able to solder SMD! I've chosen large components (1206) for the PCB, but of course there is the 44-pin package of the ATMEGA, which may need some practice and a decent solder iron/station. More importantly it needs the right solder tip: Do not use a needle style tip! This is how it's done: https://www.youtube.com/watch?v=nyele3CIs-U
+* You should be able to solder SMD! I've chosen large components (1206) for the PCB, but of course there is the 44-pin package of the ATMEGA, which may need some practice and a decent solder iron/station.
 
-* You'll have to open the scooter's throttle controller (which is glued with silicone and therefore needs some mechanical skills), remove the USB socket (glued with even more silicone, big mess!), open the bridge between the USB data pins, unsolder the throttle controller's UART Tx cable and wire it through the USB data pins (I'm going to post detailed instructions with photos in the wiki soon).
+* The PCB and front light is powered via the 5V USB supply of the scooters throttle controller and needs to be connected in series to the throttle controller's tx data line (white cable).
+  This can be accomplished by either...
+  a) opening the throttle controller (which is glued with silicone), remove the USB socket (glued with even more silicone, big mess!), open the bridge between the USB data pins, unsolder the throttle controller's UART Tx cable and wire it through the USB data pins or...
+  b) carefully removing the outer insulation of the data cable and connecting the PCB directly
 
-* You'll need to drill a hole into the front light's plastic case and the battery compartment (for the USB cable).
+* The front light's plastic case needs some mechanical modification to fit a cable through the housing (drill a hole) and fit PCB into the battery compartment.
 
-* You'll need to remove (unsolder) the on/off switch from the front light's PCB (to make room for the light sensor) and solder a small wire between the voltage regulators enable pin (again SMD) and ground.
+* You'll need to remove the front light's on/off switch and solder wire between the voltage regulators enable pin (again SMD) and ground.
 
-* You'll need to crimp some cables (sounds like a simple task, but I've seen plenty of people failing)
+* You'll need an ISP-programmer for flashing the firmware (those are available on Ebay for ~15 Euro)
 
-* You'll need to use an ISP-programmer for flashing the firmware
-
-No, this project is certainly not suitable for beginners and of course I won't take any liability if you break your scooter.
+This project is certainly not suitable for beginners and of course I won't take any liability if you break your scooter or any components of it.
 
 
 # Bill of Material (BOM)
@@ -57,7 +61,7 @@ You need to have an AVR toolchain installed (make, gcc, binutils)
 
 On Arch Linux simply install the following packages:
 
-`# pacman -S community/avr-gcc community/avr-binutils`
+`# pacman -S community/avr-gcc community/avr-binutils community/avr-libc`
 
 I'm still using my good old AVR Dragon (unfortunately, it seems to be out of production), which needs to have avrdude installed:
 
