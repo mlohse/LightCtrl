@@ -19,13 +19,11 @@ Before you consider building your own, please be aware that you'll need some ski
 * You should be able to solder SMD! I've chosen large components (1206) for the PCB, but of course there is the 44-pin package of the ATMEGA, which may need some practice and a decent solder iron/station.
 
 * The PCB and front light is powered via the 5V USB supply of the scooters throttle controller and needs to be connected in series to the throttle controller's tx data line (white cable).
-  This can be accomplished by either...
-  a) opening the throttle controller (which is glued with silicone), remove the USB socket (glued with even more silicone, big mess!), open the bridge between the USB data pins, unsolder the throttle controller's UART Tx cable and wire it through the USB data pins or...
-  b) carefully removing the outer insulation of the data cable and connecting the PCB directly
+  This can be accomplished by either opening/modifying the throttle controller (see instructions below) or creating an adapter cable which can be installed between the throttle and the motor controller (in the battery compartment).
 
 * The front light's plastic case needs some mechanical modification to fit a cable through the housing (drill a hole) and fit PCB into the battery compartment.
 
-* You'll need to remove the front light's on/off switch and solder wire between the voltage regulators enable pin (again SMD) and ground.
+* You'll need to remove the front light's on/off switch and solder wire between the voltage regulators enable pin (again SMD) and ground, see description below...
 
 * You'll need an ISP-programmer for flashing the firmware (those are available on Ebay for ~15 Euro)
 
@@ -82,3 +80,26 @@ To build the firmware change into the `src` directory and run:
 `# make program`
 
 Done.
+
+
+# Front Light PCB Modification
+1. Remove the on/off switch and undervoltage indicator led (no longer needed)
+2. Connect the voltage regulator's enable pin (outer pin) to GND, as shown:
+![front light pcb modification](https://github.com/mlohse/LightCtrl/blob/master/img/led1.jpg?raw=true)
+
+
+# Throttle Controller Modification
+1. Open the throttle controller (it is glued with silicone and requieres some force - use a knife or sharp piece of metal). Once open remove the USB socket which is also glued in with silicone and clean it as best as you can:
+![open throttle controller](https://github.com/mlohse/LightCtrl/blob/master/img/throttle1.jpg?raw=true)
+
+2. Unsolder the TX data wire (white, labels as T6):
+![tx data wire](https://github.com/mlohse/LightCtrl/blob/master/img/throttle2.jpg?raw=true)
+
+3. Open the solder bridge between the USB data lines:
+![usb solder bridge](https://github.com/mlohse/LightCtrl/blob/master/img/throttle3.jpg?raw=true)
+
+4. Conntect the white cabel (which was soldered to throttle T6 previously) to the USB data line and add a new cable from the other usb data line to the throttle's T6 pin. Note: the 4k7 resistor is optional. If it is installed the scooter can be started without the LightCtrl pcb connected. If it is not fitted, the throttle will show an error if powered on without it. This may be usefull as a weak theft-protection (if you take the front-light with you when you leave the scooter alone).
+![usb data lines connected](https://github.com/mlohse/LightCtrl/blob/master/img/throttle4.jpg?raw=true)
+
+5. Use some hot glue to put the USB socket back in
+Important: After modification the USB socket can no longer be used to charge usb devices! Do not plug in you cell phone!
