@@ -15,7 +15,14 @@ LFUSE=0xEB
 
 # Target type
 MCU=atmega1284p
+
+# AVR Dragon
 PROGRAMMER=dragon_isp
+PORT=usb
+
+# AVR ISP (clone)
+#PROGRAMMER=avrispmkII
+#PORT=/dev/ttyUSB0
 
 SRC =	main.c \
 		uart.c \
@@ -45,9 +52,9 @@ fuses:
 	avrdude -c $(PROGRAMMER) -P usb -p $(MCU) -U hfuse:w:$(HFUSE):m -U lfuse:w:$(LFUSE):m
 
 program:
-	avrdude -c $(PROGRAMMER) -P usb -p $(MCU) -U flash:w:$(TARGET).hex
+	avrdude -c $(PROGRAMMER) -P $(PORT) -p $(MCU) -U flash:w:$(TARGET).hex
 	#sleep 2
-	#avrdude -c $(PROGRAMMER) -P usb -p $(MCU) -U eeprom:w:$(TARGET).eep
+	#avrdude -c $(PROGRAMMER) -P $(PORT) -p $(MCU) -U eeprom:w:$(TARGET).eep
 
 clean:
 	rm -f $(OBJ) $(TARGET).elf $(TARGET).hex $(TARGET).lss $(TARGET).map $(TARGET).eep
