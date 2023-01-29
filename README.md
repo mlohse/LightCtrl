@@ -33,7 +33,7 @@ This project is certainly not suitable for beginners and of course I won't take 
 # Bill of Material (BOM)
 The PCB can be ordered at OSH Park (they ship worldwide):
 
-* https://oshpark.com/shared_projects/PSo9nJN7
+* https://oshpark.com/shared_projects/gwnaN0r6 (rev.B)
 
 It doesn't really matter of which brand/type you order resistors and capacitors, nor does this board require any tight tolerances. You can purchase whatever your local hardware dealer has on stock fitting the value/package described by the schematic.
 However, for convenience I've created a virtual shopping basket at Reichelt Elektronik:
@@ -65,7 +65,7 @@ I'm still using my good old AVR Dragon (unfortunately, it seems to be out of pro
 
 `# pacman -S avrdude`
 
-If you own a different programmer there is a good chance it's also supported by avrdude, otherwise just install whatever software it needs and don't forget to adopt the program/fuses section of the Makefile accordingly.
+If you own a different programmer there is a good chance it's also supported by avrdude, otherwise just install whatever software it needs and don't forget to adopt the programmer/fuses section of the Makefile accordingly.
 
 To build the firmware change into the `src` directory and run:
 
@@ -102,4 +102,4 @@ Done.
 ![usb data lines connected](https://github.com/mlohse/LightCtrl/blob/master/img/throttle4.jpg?raw=true)
 
 5. Use some hot glue to put the USB socket back in
-Important: After modification the USB socket can no longer be used to charge usb devices! Do not plug in you cell phone!
+Important: After modification the USB socket can no longer be used to charge usb devices! Do not plug in your cell phone!
