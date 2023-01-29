@@ -37,10 +37,10 @@
 /***********************************
  * Initialization                  *
  ***********************************/
-#define INIT_PORTA              0x00    // pull unused pind to GND, disable pullup on PortA,0 (light sensor)
-#define INIT_PORTB              0x00    // pull unused pind to GND, disable pullups for mosi/miso/sck
-#define INIT_PORTC              0x00    // pull unused pind to GND, switch off led light
-#define INIT_PORTD              0x00    // pull unused pind to GND, switch off leds, disable pullup on UART(s)
+#define INIT_PORTA              0x00    // pull unused pins to GND, disable pullup on PortA,0 (light sensor)
+#define INIT_PORTB              0x00    // pull unused pins to GND, disable pullups for mosi/miso/sck
+#define INIT_PORTC              0x00    // pull unused pins to GND, switch off led light
+#define INIT_PORTD              0x00    // pull unused pins to GND, switch off leds, disable pullup on UART(s)
 
 
 /***********************************
